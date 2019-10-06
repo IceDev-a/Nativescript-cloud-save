@@ -5,6 +5,7 @@ import { isAndroid } from "tns-core-modules/ui/page/page";
 import { Observable } from "rxjs/internal/Observable";
 import { Page, NavigatedData } from "tns-core-modules/ui/page";
 import * as applicationModule from "tns-core-modules/application";
+import { ObservableArray } from "tns-core-modules/data/observable-array/observable-array";
 let vm;
 declare var android: any;
 
@@ -14,6 +15,7 @@ declare var android: any;
 })
 export class HomeComponent implements OnInit {
 
+    myObservableArray;
     constructor() {
         // Use the component constructor to inject providers.
     }
@@ -22,6 +24,7 @@ export class HomeComponent implements OnInit {
         // Init your component properties here.
         console.info(android.os.Build.VERSION.SDK_INT);
         this.checkBatteryLife();
+        this.checkInstalledApp();
     }
 
     onNavigatingTo(args: NavigatedData) {
@@ -67,6 +70,27 @@ export class HomeComponent implements OnInit {
             );
         }
         // << broadcast-receiver-ts
+    }
+
+    checkInstalledApp(): void {
+        const mainIntent = new android.content.Intent(android.content.Intent.ACTION_MAIN, null);
+        mainIntent.addCategory(android.content.Intent.CATEGORY_LAUNCHER);
+        const pkgAppsList = app.android.context.getPackageManager().queryIntentActivities(mainIntent, 0);
+        // console.log(pkgAppsList);
+        // pkgAppsList.ResolveInfo.forEach((element) => {
+        //     console.log(element);
+        // });
+        const PackageManager = android.content.pm.PackageManager;
+        const pkgAppsList2: Array<any> = app.android.context.getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA);
+        console.log(pkgAppsList2);
+        this.myObservableArray = new ObservableArray(pkgAppsList2);
+        let i = 0;
+        this.myObservableArray.forEach((element) => {
+            i = i + 1;
+            console.log(element);
+            console.log(i);
+        });
+
     }
     onUnloaded() {
         if (isAndroid) {

@@ -4,6 +4,7 @@ import * as app from "tns-core-modules/application";
 import { isAndroid } from "tns-core-modules/ui/page/page";
 import { Observable } from "rxjs/internal/Observable";
 import { Page, NavigatedData } from "tns-core-modules/ui/page";
+import * as applicationModule from "tns-core-modules/application";
 let vm;
 declare var android: any;
 

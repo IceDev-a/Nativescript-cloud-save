@@ -7,7 +7,6 @@ import { Page, NavigatedData } from "tns-core-modules/ui/page";
 import * as applicationModule from "tns-core-modules/application";
 import { ObservableArray } from "tns-core-modules/data/observable-array/observable-array";
 let vm;
-declare var android: any;
 
 @Component({
     selector: "Home",
@@ -16,6 +15,7 @@ declare var android: any;
 export class HomeComponent implements OnInit {
 
     myObservableArray;
+    myArray = [];
     constructor() {
         // Use the component constructor to inject providers.
     }
@@ -75,7 +75,26 @@ export class HomeComponent implements OnInit {
     checkInstalledApp(): void {
         const mainIntent = new android.content.Intent(android.content.Intent.ACTION_MAIN, null);
         mainIntent.addCategory(android.content.Intent.CATEGORY_LAUNCHER);
-        const pkgAppsList = app.android.context.getPackageManager().queryIntentActivities(mainIntent, 0);
+        // tslint:disable-next-line: max-line-length
+        const pkgAppsList: java.util.List<android.content.pm.ResolveInfo> = app.android.context.getPackageManager().queryIntentActivities(mainIntent, 0);
+        // tslint:disable-next-line:max-line-length
+        const pkgAppsList5: Array<android.content.pm.ResolveInfo> = app.android.context.getPackageManager().queryIntentActivities(mainIntent, 0);
+        const count: number = pkgAppsList.size();
+        // console.log(pkgAppsList);
+        // console.log(pkgAppsList2);
+        // console.log(pkgAppsList2.length);
+
+        for (let i = 0; i < count; i++) {
+            const name = pkgAppsList.get(i).loadLabel(app.android.context.getPackageManager());
+            console.log(name);
+            this.myArray.push(name);
+        }
+        console.log(this.myArray);
+        console.log(pkgAppsList.get(1));
+        const firstApp: android.content.pm.ResolveInfo = pkgAppsList.get(1);
+        const firstAppName = firstApp.loadLabel(app.android.context.getPackageManager());
+        const myObservableArray2 = new ObservableArray(pkgAppsList);
+        console.log(myObservableArray2);
         // console.log(pkgAppsList);
         // pkgAppsList.ResolveInfo.forEach((element) => {
         //     console.log(element);

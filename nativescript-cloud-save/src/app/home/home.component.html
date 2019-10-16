@@ -15,7 +15,7 @@
     <Label class="action-bar-title" text="Home"></Label>
 </ActionBar>
 
-<ListView [items]="myObservableArray" class="list-group">
+<ListView [items]="myArray" class="list-group">
     <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
         <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
         <GridLayout>

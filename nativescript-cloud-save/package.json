@@ -27,9 +27,10 @@
     "nativescript-sqlite": "^2.3.3",
     "nativescript-theme-core": "~1.0.6",
     "nativescript-ui-sidedrawer": "~7.0.0",
-    "reflect-metadata": "~0.1.12",
+    "reflect-metadata": "^0.1.13",
     "rxjs": "^6.4.0",
     "tns-core-modules": "~6.1.0",
+    "typeorm": "^0.2.20",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {

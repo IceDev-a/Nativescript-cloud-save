@@ -15,11 +15,11 @@
     <Label class="action-bar-title" text="Home"></Label>
 </ActionBar>
 
-<ListView [items]="myArray" class="list-group">
-    <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+<ListView [items]="installedApps" class="list-group">
+    <ng-template let-item="item" let-i="index">
         <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
         <GridLayout>
-            <Label [text]="item" class="list-group-item" textWrap="true"></Label>
+            <Label [text]="item.appname" class="list-group-item" textWrap="true"></Label>
         </GridLayout>
     </ng-template>
 </ListView>

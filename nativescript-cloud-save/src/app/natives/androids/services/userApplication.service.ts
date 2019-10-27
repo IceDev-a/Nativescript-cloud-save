@@ -33,9 +33,10 @@ getInstalledApps(systemPackage: boolean): Array<Package> {
         newInfo.pname = p.packageName;
         newInfo.versionName = p.versionName;
         newInfo.versionCode = p.versionCode;
-        const drawableIcon: android.graphics.drawable.Drawable = p.applicationInfo.loadIcon(pm);
-        const icon: android.graphics.Bitmap = (drawableIcon as android.graphics.drawable.BitmapDrawable).getBitmap();
-        const imgFromResources: ImageSource = <ImageSource> fromNativeSource(icon);
+        const resources: android.content.res.Resources = pm.getResourcesForApplication(p.applicationInfo);
+        const appIconResId: number = p.applicationInfo.icon;
+        const appIconBitmap: android.graphics.Bitmap = android.graphics.BitmapFactory.decodeResource(app.android.context.getResources(), appIconResId);
+        const imgFromResources: ImageSource = <ImageSource> fromNativeSource(appIconBitmap);
         newInfo.icon = imgFromResources;
         res.push(newInfo);
     }

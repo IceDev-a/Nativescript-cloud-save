@@ -14,23 +14,19 @@ export class BrowseComponent implements OnInit {
     constructor() {
         // Use the component constructor to inject providers.
         this.getApplications();
-        this.addApplication();
     }
 
     getApplications() {
-        UserApplication.find().then((todos) => {
-            console.log(todos);
+        UserApplication.find().then((apps) => {
+            this.applications = apps;
         }).catch(console.error);
     }
 
-    addApplication() {
-        const application = new UserApplication();
-
-        application.name = "TestName";
-        application.systemName = "TestSystemName";
-
-        application.save().then(() => this.getApplications())
-            .catch(console.error);
+    removeApplication(userApp: UserApplication) {
+        UserApplication.remove(userApp).then((apps) => {
+            alert("remove " + userApp.name);
+            this.getApplications();
+        }).catch(console.error);
     }
 
     ngOnInit(): void {

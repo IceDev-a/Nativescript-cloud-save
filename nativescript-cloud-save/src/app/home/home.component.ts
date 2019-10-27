@@ -35,4 +35,9 @@ export class HomeComponent implements OnInit {
             this.installedApps.push(name);
         }
     }
+
+    addApplication(item: Package) {
+        alert("Add " + item.appname);
+        this.userApplicationService.addApplication(item);
+    }
 }

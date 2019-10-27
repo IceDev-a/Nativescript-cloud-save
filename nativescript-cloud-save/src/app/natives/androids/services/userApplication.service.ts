@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import * as app from "tns-core-modules/application";
 import { Package } from "../../../shared/models/applications/package.model";
 import { ImageSource, fromFile, fromResource, fromBase64, fromNativeSource } from "tns-core-modules/image-source";
+import UserApplication from "~/app/shared/infrastructures/entities/application.entity";
 
 @Injectable({
   providedIn: "root"
@@ -44,5 +45,12 @@ getInstalledApps(systemPackage: boolean): Array<Package> {
 
 isSystemPackage(packageInfo: android.content.pm.PackageInfo): boolean {
     return ((packageInfo.applicationInfo.flags & android.content.pm.ApplicationInfo.FLAG_SYSTEM) !== 0);
+}
+
+addApplication(p: Package) {
+    const application = new UserApplication();
+    application.name = p.appname;
+    application.systemName = p.pname;
+    application.save();
 }
 }

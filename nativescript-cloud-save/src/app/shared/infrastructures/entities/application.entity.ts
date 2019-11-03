@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm/browser";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from "typeorm/browser";
+import SaveFile from "./savefile.entity";
 
 @Entity({name: "userApplication"})
 export default class UserApplication extends BaseEntity {
@@ -11,4 +12,13 @@ export default class UserApplication extends BaseEntity {
 
     @Column()
     systemName: string;
+
+    @Column()
+    createdOn: Date;
+
+    @Column()
+    updatedOn: Date;
+
+    @OneToMany((type) => SaveFile, (saveFile) => saveFile.userApplication)
+    saveFiles: Array<SaveFile>;
 }

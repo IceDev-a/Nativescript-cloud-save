@@ -6,19 +6,20 @@ import { AppModule } from "./app/app.module";
 // TypeORM
 import { createConnection, getManager } from "typeorm/browser";
 
-import UserApplication from "./app/shared/infrastructures/entities/application.entity";
 import { Connection } from "typeorm";
-// import { UserApplicationDatabaseService } from "./app/shared/infrastructures/services/userApplicationDatabaseService";
+import UserApplication from "./app/shared/infrastructures/entities/application.entity";
+import SaveFile from "./app/shared/infrastructures/entities/savefile.entity";
 // Driver
 const driver = require("nativescript-sqlite");
 (async () => {
     try {
         const connection = await createConnection({
-            database: "userApplication.db",
+            database: "user_data.db",
             type: "nativescript",
             driver,
             entities: [
-                UserApplication
+                UserApplication,
+                SaveFile
             ],
             logging: true
         });

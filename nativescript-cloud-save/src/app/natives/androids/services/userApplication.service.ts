@@ -52,6 +52,8 @@ addApplication(p: Package) {
     const application = new UserApplication();
     application.name = p.appname;
     application.systemName = p.pname;
+    application.createdOn = new Date();
+    application.updatedOn = new Date();
     application.save();
 }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
+import { MediafilepickerService } from "../shared/services/mediafilepicker.service";
+import { FileSystemService } from "../natives/androids/services/fileSystem.service";
 
 @Component({
     selector: "Search",
@@ -8,7 +10,8 @@ import * as app from "tns-core-modules/application";
 })
 export class SearchComponent implements OnInit {
 
-    constructor() {
+    constructor(private mediaFilePickerService: MediafilepickerService ,
+                private androidFileSystemService: FileSystemService) {
         // Use the component constructor to inject providers.
     }
 
@@ -19,5 +22,13 @@ export class SearchComponent implements OnInit {
     onDrawerButtonTap(): void {
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.showDrawer();
+    }
+
+    openCustomFilesPicker() {
+        this.mediaFilePickerService.openCustomFilesPicker();
+    }
+
+    openFileManager() {
+        this.androidFileSystemService.openFile();
     }
 }

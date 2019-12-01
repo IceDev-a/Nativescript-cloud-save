@@ -14,12 +14,15 @@
     </ActionItem>
     <Label class="action-bar-title" text="Home"></Label>
 </ActionBar>
+<GridLayout rows="auto, *">
+    <Button row="0" text="Login" (tap)="onLogin()"></Button>
+    <ListView row="1" [items]="installedApps" class="list-group">
+        <ng-template let-item="item" let-i="index">
+            <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
+            <GridLayout>
+                <Label [text]="item.appname" class="list-group-item" (tap)="addApplication(item)" textWrap="true"></Label>
+            </GridLayout>
+        </ng-template>
+    </ListView>
+</GridLayout>
 
-<ListView [items]="installedApps" class="list-group">
-    <ng-template let-item="item" let-i="index">
-        <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
-        <GridLayout>
-            <Label [text]="item.appname" class="list-group-item" (tap)="addApplication(item)" textWrap="true"></Label>
-        </GridLayout>
-    </ng-template>
-</ListView>

@@ -36,6 +36,10 @@ export class HomeComponent implements OnInit {
         }
     }
 
+    onLogin() {
+        console.log("onLogin");
+    }
+
     addApplication(item: Package) {
         alert("Add " + item.appname);
         this.userApplicationService.addApplication(item);

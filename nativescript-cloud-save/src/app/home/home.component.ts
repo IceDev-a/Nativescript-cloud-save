@@ -3,6 +3,8 @@ import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 import { UserApplicationService } from "../natives/androids/services/userApplication.service";
 import { Package } from "../shared/models/applications/package.model";
+import { AuthenticationService } from "../shared/services/authentication.service";
+import { ITnsOAuthTokenResult } from "nativescript-oauth2";
 
 @Component({
     selector: "Home",
@@ -10,7 +12,9 @@ import { Package } from "../shared/models/applications/package.model";
 })
 export class HomeComponent implements OnInit {
     installedApps: Array<Package> = new Array<Package>();
-    constructor(private userApplicationService: UserApplicationService) {
+    constructor(
+        private userApplicationService: UserApplicationService,
+        private authenticationService: AuthenticationService) {
         // Use the component constructor to inject providers.
     }
 
@@ -38,6 +42,15 @@ export class HomeComponent implements OnInit {
 
     onLogin() {
         console.log("onLogin");
+        const loginResult: Promise<ITnsOAuthTokenResult> = this.authenticationService.tnsOAuthLogin("google");
+        loginResult.then(
+            (response) => {
+            alert(JSON.stringify(response));
+            },
+            (error) => {
+                alert("Login failed");
+            }
+        );
     }
 
     addApplication(item: Package) {

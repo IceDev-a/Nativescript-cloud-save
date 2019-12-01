@@ -3,12 +3,14 @@ import { platformNativeScriptDynamic } from "nativescript-angular/platform";
 
 import { AppModule } from "./app/app.module";
 
+import UserApplication from "./app/shared/infrastructures/entities/application.entity";
+import SaveFile from "./app/shared/infrastructures/entities/savefile.entity";
+import { configureOAuthProviders } from "./app/shared/helpers/authentication-provider.helper";
 // TypeORM
 import { createConnection, getManager } from "typeorm/browser";
 
-import { Connection } from "typeorm";
-import UserApplication from "./app/shared/infrastructures/entities/application.entity";
-import SaveFile from "./app/shared/infrastructures/entities/savefile.entity";
+// Sqlite
+
 // Driver
 const driver = require("nativescript-sqlite");
 (async () => {
@@ -37,4 +39,7 @@ const driver = require("nativescript-sqlite");
         console.error(err);
     }
 })();
+
+// OAuth2
+configureOAuthProviders();
 platformNativeScriptDynamic().bootstrapModule(AppModule);

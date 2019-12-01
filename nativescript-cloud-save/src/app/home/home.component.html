@@ -15,7 +15,7 @@
     <Label class="action-bar-title" text="Home"></Label>
 </ActionBar>
 <GridLayout rows="auto, *">
-    <Button row="0" text="Login" (tap)="onLogin()"></Button>
+    <Button row="0" text="Login" class="btn btn-primary" (tap)="onLogin()"></Button>
     <ListView row="1" [items]="installedApps" class="list-group">
         <ng-template let-item="item" let-i="index">
             <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->

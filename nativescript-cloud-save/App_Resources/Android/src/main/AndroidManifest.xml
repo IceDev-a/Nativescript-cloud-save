@@ -23,6 +23,7 @@
 
 		<activity
 			android:name="com.tns.NativeScriptActivity"
+			android:launchMode="singleTask"
 			android:label="@string/title_activity_kimera"
 			android:configChanges="keyboard|keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|locale|uiMode"
 			android:theme="@style/LaunchScreenTheme">
@@ -33,6 +34,14 @@
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
+
+			<intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Custom URL Schemes -->
+                <data android:path="/auth" android:scheme="com.googleusercontent.apps.1055966310361-l7oec360dj2dt2glb6j70vtomg0cn247"/>
+            </intent-filter>
 		</activity>
 		<activity android:name="com.tns.ErrorReportActivity"/>
 	</application>
